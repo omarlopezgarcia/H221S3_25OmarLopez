@@ -25,7 +25,7 @@ CREATE TABLE asstudent (
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR 
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR 
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') NOT NULL,
-    career char(2) check(career = 'AS' or career = 'PA') NOT NULL,
+    career char(2) check(career = 'AS') DEFAULT ('AS') NOT NULL,
     semester char(3) check(semester = 'I' OR
 						semester = 'II' OR
 						semester = 'III' OR
@@ -45,7 +45,7 @@ CREATE TABLE pastudent (
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR 
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR 
 			document_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') NOT NULL,
-    career char(2) check(career = 'AS' or career = 'PA') NOT NULL,
+    career char(2) check(career = 'PA') DEFAULT ('PA') NOT NULL,
     semester char(3) check(semester = 'I' OR
 						semester = 'II' OR
 						semester = 'III' OR
@@ -104,7 +104,7 @@ ALTER TABLE pastudentpay ADD CONSTRAINT pastudentpay_pastudent
     FOREIGN KEY (pastudent_identifier)
     REFERENCES pastudent (identifier);
 --------------------------------------------------------------------------------
------ TABLA VISTA Y CADA UNA CON SU INSERCIÓN
+----- TABLA VISTA Y CADA UNA CON SU INSERCIÃ“N
 -- VISTA AS STUDENT ACTIVE
 CREATE VIEW asstudent_active
 	AS
@@ -148,7 +148,7 @@ CREATE VIEW pastudent_active
 		career,
 		semester,
 		active
-	FROM asstudent
+	FROM pastudent
 	WHERE active='A'
 GO
 -- VISTA PA STUDENT INACTIVE
@@ -163,7 +163,7 @@ CREATE VIEW pastudent_inactive
 		career,
 		semester,
 		active
-	FROM asstudent
+	FROM pastudent
 	WHERE active='I'
 GO
 ----------------------------------
@@ -210,8 +210,8 @@ CREATE VIEW pastudentpay_debt
 		d.title AS 'derecho',
 		p.amount,
 		p.payment
-	FROM asstudentpay AS p
-	INNER JOIN pastudent AS pa ON p.asstudent_identifier = pa.identifier
+	FROM pastudentpay AS p
+	INNER JOIN pastudent AS pa ON p.pastudent_identifier = pa.identifier
 	INNER JOIN duty AS d ON p.duty_identifier = d.identifier
 	WHERE payment='D'
 GO
@@ -226,8 +226,8 @@ CREATE VIEW pastudentpay_cancelled
 		d.title AS 'derecho',
 		p.amount,
 		p.payment
-	FROM asstudentpay AS p
-	INNER JOIN pastudent AS pa ON p.asstudent_identifier = pa.identifier
+	FROM pastudentpay AS p
+	INNER JOIN pastudent AS pa ON p.pastudent_identifier = pa.identifier
 	INNER JOIN duty AS d ON p.duty_identifier = d.identifier
 	WHERE payment='C'
 GO
