@@ -61,7 +61,7 @@ insert into asstudentpay (amount, payment, asstudent_identifier, duty_identifier
 ('200.00','C',12,1);
 
 ---- PAGO ESTUDIANTES PA
-insert into pastudentpay (amount, payment, asstudent_identifier, duty_identifier) values
+insert into pastudentpay (amount, payment, pastudent_identifier, duty_identifier) values
 ('100.00','D',1,1),
 ('140.00','D',2,1),
 ('100.00','D',3,1),
