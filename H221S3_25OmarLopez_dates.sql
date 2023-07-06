@@ -26,7 +26,7 @@ insert into asstudent (names, last_name, document_type, document_number, career,
 ('Pascual','Zabaleta Lombardi','DNI','72893577','AS','III'),
 ('Silvio','Verdejo Campusano','DNI','70145327','AS','III'),
 ('Ezequiel','Noriega Marques','DNI','75261202','AS','III'),
-('Adelardo','del Novoa Carrión','DNI','70905459','AS','III'),
+('Adelardo','del Novoa CarriÃ³n','DNI','70905459','AS','III'),
 ('Celestino','Aguila Nicolas','DNI','72308430','AS','III'),
 ('Mariana','Cifuentes Frutos','DNI','76787956','AS','III');
 
@@ -46,7 +46,7 @@ insert into pastudent (names, last_name, document_type, document_number, career,
 ('Maria Franchesca','Tenorio Fernandez','DNI','88224413','PA','III');
 
 ---- PAGO ESTUDIANTES AS
-insert into asstundentpay (amount, payment, asstudent_identifier, duty_identifier) values
+insert into asstudentpay (amount, payment, asstudent_identifier, duty_identifier) values
 ('200.00','C',1,1),
 ('100.00','D',2,1),
 ('200.00','C',3,1),
@@ -61,7 +61,7 @@ insert into asstundentpay (amount, payment, asstudent_identifier, duty_identifie
 ('200.00','C',12,1);
 
 ---- PAGO ESTUDIANTES PA
-insert into pastundentpay (amount, payment, asstudent_identifier, duty_identifier) values
+insert into pastudentpay (amount, payment, asstudent_identifier, duty_identifier) values
 ('100.00','D',1,1),
 ('140.00','D',2,1),
 ('100.00','D',3,1),
