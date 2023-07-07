@@ -7,7 +7,7 @@ public class Insertar {
 
 	public static void main(String[] args) {
 		try {
-			Asstudent bean = new Asstudent("Omar", "Lopez Garcia", "DNI", "71905459", "AS", "III");
+			Asstudent bean = new Asstudent("Omar", "Lopez Garcia", "DNI", "70905418", "AS", "III");
 			CrudAsstudentService asstudentService = new CrudAsstudentService();
 			asstudentService.insert(bean);
 			System.out.println(bean);

@@ -25,16 +25,16 @@ public class PastudentController extends HttpServlet {
 			throws ServletException, IOException {
 		String path = request.getServletPath();
 		switch (path) {
-		case "/AsstudentBuscar":
+		case "/PastudentBuscar":
 			buscar(request, response);
 			break;
-		case "/AsstudentProcesar":
+		case "/PastudentProcesar":
 			procesar(request, response);
 			break;
-		case "/AsstudentActualizar":
+		case "/PastudentActualizar":
 			actualizar(request, response);
 			break;
-		case "/AsstudentHistorial":
+		case "/PastudentHistorial":
 			historial(request, response);
 			break;
 		}
