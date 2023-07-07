@@ -112,11 +112,11 @@
 									<label for="frmSemester" class="form-label">Semestre</label>
 										<select class="form-select" id="frmSemester" required>
 										<option selected disabled value="">Elige...</option>
-										<option value="I">I</option>
-										<option value="II">II</option>
-										<option value="III">III</option>
-										<option value="IV">IV</option>
-										<option value="V">V</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
 									</select>
 										<div class="invalid-feedback">Por favor, coloque bien el semestre.</div>
 									</div>
@@ -246,7 +246,7 @@
 							detalleTabla += "<td>" + item.career + "</td>";
 							detalleTabla += "<td>" + item.semester + "</td>";
 							detalleTabla += "<td>";
-							detalleTabla += "<a class='btn btn-success' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
+							detalleTabla += "<a class='btn btn-primary' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
 							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
 							detalleTabla += "</td>";
 							detalleTabla += "</tr>";

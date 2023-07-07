@@ -98,15 +98,17 @@ public class CrudPastudentService implements CrudServiceSpec<Pastudent>, RowMapp
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		Pastudent item;
-		String names, last_name, sql;
+		String names, last_name, semester, sql;
 		names = "%" + UtilService.setStringVacio(bean.getNames()) + "%";
 		last_name = "%" + UtilService.setStringVacio(bean.getLast_name()) + "%";
+		semester = "%" + UtilService.setStringVacio(bean.getSemester()) + "%";
 		try {
 			cn = AccesoDB.getConnection();
-			sql = SQL_SELECT_ACTIVE + " WHERE names LIKE ? AND last_name LIKE ?";
+			sql = SQL_SELECT_ACTIVE + " WHERE names LIKE ? AND last_name LIKE ? AND semester LIKE ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, names);
 			pstm.setString(2, last_name);
+			pstm.setString(3, semester);
 			rs = pstm.executeQuery();
 			while(rs.next()) {
 				item = mapRow(rs);

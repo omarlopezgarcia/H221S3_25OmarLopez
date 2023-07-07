@@ -12,6 +12,7 @@ public class ConsultaFiltros {
 			Pastudent bean = new Pastudent();
 			bean.setNames("");
 			bean.setLast_name("");
+			bean.setSemester("");
 			CrudPastudentService pastudentService = new CrudPastudentService();
 			List<Pastudent> lista = pastudentService.get(bean);
 			for (Pastudent pastudent : lista) {

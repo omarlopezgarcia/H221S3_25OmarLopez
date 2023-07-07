@@ -7,7 +7,7 @@ public class Editar {
 
 	public static void main(String[] args) {
 		try {
-			Pastudent bean = new Pastudent(16,"Omar","Lopez Garcia","DNI","15355641", "PA", "III");
+			Pastudent bean = new Pastudent(16,"Omar","Lopez Garcia","DNI","15355641", "PA", "2");
 			CrudPastudentService pastudentService = new CrudPastudentService();
 			pastudentService.update(bean);
 			System.out.println(bean);

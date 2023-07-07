@@ -35,13 +35,23 @@
 									<button type="button" class="btn d-none" id="btnActualizar"
 										name="btnActualizar">Actualizar</button>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-2">
 									<input type="text" class="form-control" id="names" name="names"
 										placeholder="Ingrese nombre">
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<input type="text" class="form-control" id="last_name"
 										name="last_name" placeholder="Ingrese apellido">
+								</div>
+								<div class="col-sm-2">
+									<select class="form-select" id="semester" name="semester">
+										<option selected value="">Todos los semestres</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
 								</div>
 								<div class="col-sm-2">
 									<button type="button" class="btn btn-primary mb-2"
@@ -135,11 +145,11 @@
 									<label for="frmSemester" class="form-label">Semestre</label>
 									<select class="form-select" id="frmSemester" required>
 										<option selected disabled value="">Elige...</option>
-										<option value="I">I</option>
-										<option value="II">II</option>
-										<option value="III">III</option>
-										<option value="IV">IV</option>
-										<option value="V">V</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="5">4</option>
+										<option value="5">5</option>
 									</select>
 									<div class="invalid-feedback">Seleccione el semestre que corresponda.</div>
 								</div>
@@ -225,6 +235,7 @@
 		  }
 		})
 	}
+	
 
 	// Funcion fnBtnProcesar
 	function fnBtnProcesar() {
@@ -255,12 +266,13 @@
 		fnEstadoFormulario(ACCION_NUEVO);
 		document.getElementById("divResultado").style.display = "none";
 		document.getElementById("divRegistro").style.display = "block";
-	}
+	} 
 
 	function fnBtnBuscar() {
 		let names = document.getElementById("names").value;
 		let last_name = document.getElementById("last_name").value;
-		let url = "PastudentBuscar?names=" + names + "&last_name=" + last_name;
+		let semester = document.getElementById("semester").value;
+		let url = "PastudentBuscar?names=" + names + "&last_name=" + last_name + "&semester=" + semester;
 		let xhttp = new XMLHttpRequest();
 		xhttp.open("GET", url, true);
 		xhttp.onreadystatechange = function() {
@@ -278,7 +290,7 @@
 							detalleTabla += "<td>" + item.career + "</td>";
 							detalleTabla += "<td>" + item.semester + "</td>";
 							detalleTabla += "<td>";
-							detalleTabla += "<a class='btn btn-warning' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
+							detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
 							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
 							detalleTabla += "</td>";
 							detalleTabla += "</tr>";

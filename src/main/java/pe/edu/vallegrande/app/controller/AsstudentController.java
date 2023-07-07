@@ -83,10 +83,12 @@ public class AsstudentController extends HttpServlet {
 		// Datos
 		String names = request.getParameter("names");
 		String last_name = request.getParameter("last_name");
+		String semester = request.getParameter("semester");
 		// Proceso
 		Asstudent bean = new Asstudent();
 		bean.setNames(names);
 		bean.setLast_name(last_name);
+		bean.setSemester(semester);
 		List<Asstudent> lista = service.get(bean);
 		// Preparando el JSON
 		Gson gson = new Gson();
