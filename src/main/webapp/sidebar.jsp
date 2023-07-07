@@ -11,8 +11,8 @@
 				<div class="sb-sidenav-menu-heading">ANÁLISIS DE SISTEMAS</div>
 				<!-- Estudiantes AS -->
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-					data-bs-target="#collapseUsuarios" aria-expanded="false"
-					aria-controls="#collapseUsuarios">
+					data-bs-target="#collapseListadoAS" aria-expanded="false"
+					aria-controls="#collapseListadoAS">
 					<div class="sb-nav-link-icon">
 						<i class="fa-solid fa-user"></i>
 					</div> Listado
@@ -20,7 +20,7 @@
 						<i class="fas fa-angle-down"></i>
 					</div>
 				</a>
-				<div class="collapse" id="collapseUsuarios"
+				<div class="collapse" id="collapseListadoAS"
 					aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
 						<a class="nav-link" href="asstudent.jsp">Lista</a>
@@ -29,8 +29,8 @@
 				</div>
 				<!-- Pagos de Estudiantes de AS -->
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-					data-bs-target="#collapseReservas" aria-expanded="false"
-					aria-controls="#collapseReservas">
+					data-bs-target="#collapsePagosAS" aria-expanded="false"
+					aria-controls="#collapsePagosAS">
 					<div class="sb-nav-link-icon">
 						<i class="fa-solid fa-calendar-days"></i>
 					</div> Pagos
@@ -38,11 +38,11 @@
 						<i class="fas fa-angle-down"></i>
 					</div>
 				</a>
-				<div class="collapse" id="collapseReservas"
+				<div class="collapse" id="collapsePagosAS"
 					aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="">Deuda</a>
-						<a class="nav-link" href="">Cancelado</a>
+						<a class="nav-link" href="asd">Deuda</a>
+						<a class="nav-link" href="asd">Cancelado</a>
 					</nav>
 				</div>
 				
@@ -50,8 +50,8 @@
 				<div class="sb-sidenav-menu-heading">PRODUCCIÓN AGRARIA</div>
 				<!-- Estudiantes PA -->
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-					data-bs-target="#collapseAutores" aria-expanded="false"
-					aria-controls="#collapseAutores">
+					data-bs-target="#collapseListadoPA" aria-expanded="false"
+					aria-controls="#collapseListadoPA">
 					<div class="sb-nav-link-icon">
 						<i class="fa-solid fa-address-book"></i>
 					</div> Listado
@@ -59,7 +59,7 @@
 						<i class="fas fa-angle-down"></i>
 					</div>
 				</a>
-				<div class="collapse" id="collapseAutores"
+				<div class="collapse" id="collapseListadoPA"
 					aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
 						<a class="nav-link" href="pastudent.jsp">Lista</a>
@@ -68,8 +68,8 @@
 				</div>
 				<!-- Pagos de Estudiantes PA -->
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-					data-bs-target="#collapseLibros" aria-expanded="false"
-					aria-controls="#collapseLibros">
+					data-bs-target="#collapsePagosPA" aria-expanded="false"
+					aria-controls="#collapsePagosPA">
 					<div class="sb-nav-link-icon">
 						<i class="fa-solid fa-book"></i>
 					</div> Pagos
@@ -77,11 +77,11 @@
 						<i class="fas fa-angle-down"></i>
 					</div>
 				</a>
-				<div class="collapse" id="collapseLibros"
+				<div class="collapse" id="collapsePagosPA"
 					aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="">Deuda</a>
-						<a class="nav-link" href="">Cancelado</a>
+						<a class="nav-link" href="asd">Deuda</a>
+						<a class="nav-link" href="asd">Cancelado</a>
 					</nav>
 				</div>
 			</div>
