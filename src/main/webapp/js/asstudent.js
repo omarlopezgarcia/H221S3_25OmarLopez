@@ -62,7 +62,6 @@
     }
   });
 
-
   // Validar el formulario al intentar enviarlo
   form.addEventListener('submit', function (event) {
     if (!form.checkValidity()) {

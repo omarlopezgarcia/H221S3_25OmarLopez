@@ -3,14 +3,14 @@ package pe.edu.vallegrande.app.model;
 public class Pastudent {
 
 	private Integer identifier;
-	private String names, last_name, document_type, document_number, career, semester, active;
+	private String names, last_name, document_type, document_number, career, semester, title, amount, active;
 	
 	public Pastudent() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Pastudent(Integer identifier, String names, String last_name, String document_type, String document_number,
-			String career, String semester, String active) {
+			String career, String semester, String title, String amount, String active) {
 		super();
 		this.identifier = identifier;
 		this.names = names;
@@ -19,11 +19,13 @@ public class Pastudent {
 		this.document_number = document_number;
 		this.career = career;
 		this.semester = semester;
+		this.title = title;
+		this.amount = amount;
 		this.active = active;
 	}
 
 	public Pastudent(String names, String last_name, String document_type, String document_number, String career,
-			String semester, String active) {
+			String semester, String title, String amount, String active) {
 		super();
 		this.names = names;
 		this.last_name = last_name;
@@ -31,11 +33,13 @@ public class Pastudent {
 		this.document_number = document_number;
 		this.career = career;
 		this.semester = semester;
+		this.title = title;
+		this.amount = amount;
 		this.active = active;
 	}
 
 	public Pastudent(Integer identifier, String names, String last_name, String document_type, String document_number,
-			String career, String semester) {
+			String career, String semester, String title, String amount) {
 		super();
 		this.identifier = identifier;
 		this.names = names;
@@ -44,10 +48,12 @@ public class Pastudent {
 		this.document_number = document_number;
 		this.career = career;
 		this.semester = semester;
+		this.title = title;
+		this.amount = amount;
 	}
 
 	public Pastudent(String names, String last_name, String document_type, String document_number, String career,
-			String semester) {
+			String semester, String title, String amount) {
 		super();
 		this.names = names;
 		this.last_name = last_name;
@@ -55,6 +61,8 @@ public class Pastudent {
 		this.document_number = document_number;
 		this.career = career;
 		this.semester = semester;
+		this.title = title;
+		this.amount = amount;
 	}
 
 	public Integer getIdentifier() {
@@ -113,6 +121,22 @@ public class Pastudent {
 		this.semester = semester;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getAmount() {
+		return amount;
+	}
+
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	
 	public String getActive() {
 		return active;
 	}
@@ -130,6 +154,8 @@ public class Pastudent {
 		data += ", " + this.document_number;
 		data += ", " + this.career;
 		data += ", " + this.semester;
+		data += ", " + this.title;
+		data += ", " + this.amount;
 		data += ", " + this.active + "]";
 		return data;
 	}

@@ -22,9 +22,9 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">ANÁLISIS DE SISTEMAS</h1>
+					<h1 class="mt-4">PRODUCCIÓN AGRARIA</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item">ANÁLISIS DE SISTEMAS</li>
+						<li class="breadcrumb-item">PRODUCCIÓN AGRARIA</li>
 						<li class="breadcrumb-item">Listado</li>
 						<li class="breadcrumb-item active">Deuda</li>
 					</ol>
@@ -39,7 +39,7 @@
 									<input type="text" class="form-control" id="names" name="names"
 										placeholder="Ingrese nombre">
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									<input type="text" class="form-control" id="last_name"
 										name="last_name" placeholder="Ingrese apellido">
 								</div>
@@ -51,6 +51,23 @@
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<select class="form-select" id="title" name="title">
+										<option selected value="">Todos los derechos</option>
+										<option value="Matricula 1">Matricula 1</option>
+										<option value="Mensualidad Marzo">Mensualidad Marzo</option>
+										<option value="Mensualidad Abril">Mensualidad Abril</option>
+										<option value="Mensualidad Mayo">Mensualidad Mayo</option>
+										<option value="Mensualidad Junio">Mensualidad Junio</option>
+										<option value="Mensualidad Julio">Mensualidad Julio</option>
+										<option value="Matricula 2">Matricula 2</option>
+										<option value="Mensualidad Agosto">Mensualidad Agosto</option>
+										<option value="Mensualidad Setiembre">Mensualidad Setiembre</option>
+										<option value="Mensualidad Octubre">Mensualidad Octubre</option>
+										<option value="Mensualidad Noviembre">Mensualidad Noviembre</option>
+										<option value="Mensualidad Diciembre">Mensualidad Diciembre</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -75,10 +92,13 @@
 										<th scope="col">#</th>
 										<th scope="col">Nombre</th>
 										<th scope="col">Apellido</th>
-										<th scope="col">Tipo Documento</th>
-										<th scope="col">Nº Documento</th>
+										<th scope="col">Tipo de Doc.</th>
+										<th scope="col">Nro. de Doc.</th>
 										<th scope="col">Carrera</th>
 										<th scope="col">Semestre</th>
+										<th scope="col">Derecho</th>
+										<th scope="col">Monto</th>
+										<th scope="col">Estado</th>
 										<th scope="col">Accion</th>
 									</tr>
 								</thead>
@@ -148,11 +168,47 @@
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
-										<option value="5">4</option>
+										<option value="4">4</option>
 										<option value="5">5</option>
 									</select>
 									<div class="invalid-feedback">Seleccione el semestre que corresponda.</div>
 								</div>
+								<div class="col-md-2">
+									<label for="frmTitle" class="form-label">Derecho</label>
+									<select class="form-select" id="frmTitle" required>
+										<option selected disabled value="">Elige...</option>
+										<option value="Matricula 1">Matricula 1</option>
+										<option value="Mensualidad Marzo">Mensualidad Marzo</option>
+										<option value="Mensualidad Abril">Mensualidad Abril</option>
+										<option value="Mensualidad Mayo">Mensualidad Mayo</option>
+										<option value="Mensualidad Junio">Mensualidad Junio</option>
+										<option value="Mensualidad Julio">Mensualidad Julio</option>
+										<option value="Matricula 2">Matricula 2</option>
+										<option value="Mensualidad Agosto">Mensualidad Agosto</option>
+										<option value="Mensualidad Setiembre">Mensualidad Setiembre</option>
+										<option value="Mensualidad Octubre">Mensualidad Octubre</option>
+										<option value="Mensualidad Noviembre">Mensualidad Noviembre</option>
+										<option value="Mensualidad Diciembre">Mensualidad Diciembre</option>
+									</select>
+									<div class="invalid-feedback">Seleccione el derecho que corresponda.</div>
+								</div>
+								<div class="col-md-3">
+									<label for="frmAmount" class="form-label">Monto</label>
+									<input type="float" class="form-control" id="frmAmount"
+										required>
+									<div class="valid-feedback">¡Se ve bien!</div>
+									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
+								</div>
+								<div class="col-md-3">
+									<label for="frmActive" class="form-label">Estado</label>
+									<select class="form-select" id="frmActive" required>
+										<option selected disabled value="">Elige...</option>
+										<option value="D">Deuda</option>
+										<option value="C">Cancelado</option>
+									</select>
+									<div class="invalid-feedback">Por favor, elija el estado.</div>
+								</div>
+								
 								<div class="col-12">
 									<button class="btn btn-primary" id="btnProcesar" type="submit">Enviar
 										formulario</button>
@@ -195,6 +251,9 @@
 	let frmDocument_number = document.getElementById('frmDocument_number');
 	let frmCareer = document.getElementById('frmCareer');
 	let frmSemester = document.getElementById('frmSemester');
+	let frmTitle = document.getElementById('frmTitle');
+	let frmAmount = document.getElementById('frmAmount');
+	let frmActive = document.getElementById('frmActive');
 
 	// Programar los controles
 	btnBuscar.addEventListener("click", fnBtnBuscar);
@@ -215,17 +274,17 @@
 	function fnEliminar(identifier) {
 		Swal.fire({
 		  title: 'Estás seguro?',
-		  text: "Puedes reactivarlo en la pestaña inactivos!",
+		  text: "El pago ya está cancelado?!",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Si, desactivar!'
+		  confirmButtonText: 'Si, ya está!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
 		    Swal.fire(
-		      'Eliminado!',
-		      'Es estudiante ha sido desactivado.',
+		      'Puesto como cancelado!',
+		      'El pago del estudiante está cancelado.',
 		      'success'
 		    )
 			document.getElementById("accion").value = ACCION_ELIMINAR;
@@ -250,6 +309,9 @@
 		datos += "&document_number=" + document.getElementById("frmDocument_number").value;
 		datos += "&career=" + document.getElementById("frmCareer").value;
 		datos += "&semester=" + document.getElementById("frmSemester").value;
+		datos += "&title=" + document.getElementById("frmTitle").value;
+		datos += "&amount=" + document.getElementById("frmAmount").value;
+		datos += "&active=" + document.getElementById("frmActive").value;
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", "PastudentProcesar", true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -272,7 +334,8 @@
 		let names = document.getElementById("names").value;
 		let last_name = document.getElementById("last_name").value;
 		let semester = document.getElementById("semester").value;
-		let url = "PastudentBuscar?names=" + names + "&last_name=" + last_name + "&semester=" + semester;
+		let title = document.getElementById("title").value;
+		let url = "AsstudentBuscar?names=" + names + "&last_name=" + last_name + "&semester=" + semester + "&title=" + title;
 		let xhttp = new XMLHttpRequest();
 		xhttp.open("GET", url, true);
 		xhttp.onreadystatechange = function() {
@@ -289,6 +352,9 @@
 							detalleTabla += "<td>" + item.document_number + "</td>";
 							detalleTabla += "<td>" + item.career + "</td>";
 							detalleTabla += "<td>" + item.semester + "</td>";
+							detalleTabla += "<td>" + item.title + "</td>";
+							detalleTabla += "<td>" + item.amount + "</td>";
+							detalleTabla += "<td>" + item.active + "</td>";
 							detalleTabla += "<td>";
 							detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
 							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
@@ -320,6 +386,9 @@
 							detalleTabla += "<td>" + item.document_number + "</td>";
 							detalleTabla += "<td>" + item.career + "</td>";
 							detalleTabla += "<td>" + item.semester + "</td>";
+							detalleTabla += "<td>" + item.title + "</td>";
+							detalleTabla += "<td>" + item.amount + "</td>";
+							detalleTabla += "<td>" + item.active + "</td>";
 							detalleTabla += "<td>";
 							detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
 							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
@@ -340,12 +409,15 @@
 		arreglo.forEach(function(item) {
 			if(item.identifier == identifier){
 				frmIdentifier.value = item.identifier;
-				frmNames.value = item.names;
-				frmLast_name.value = item.last_name;
-				frmDocument_type.value = item.document_type;
-				frmDocument_number.value = item.document_number;
-				frmCareer.value = item.career;
-				frmSemester.value = item.Semester;
+			      frmNames.value = item.names;
+			      frmLast_name.value = item.last_name;
+			      frmDocument_type.value = item.document_type;
+			      frmDocument_number.value = item.document_number;
+			      frmCareer.value = item.career;
+			      frmSemester.value = item.semester;
+			      frmTitle.value = item.title;
+			      frmAmount.value = item.amount;
+			      frmActive.value = item.active;
 				return true;
 			}
 		});
@@ -358,6 +430,9 @@
 		frmDocument_number.disabled = (estado==ACCION_ELIMINAR)
 		frmCareer.disabled = (estado==ACCION_ELIMINAR)
 		frmSemester.disabled = (estado==ACCION_ELIMINAR)
+		frmTitle.disabled = (estado==ACCION_ELIMINAR)
+		frmAmount.disabled = (estado==ACCION_ELIMINAR)
+		frmActive.disabled = (estado==ACCION_ELIMINAR)
 		if(estado==ACCION_NUEVO){
 			frmIdentifier.value = "0";
 			frmNames.value = "";
@@ -366,6 +441,9 @@
 			frmDocument_number.value = "";
 			frmCareer.value = "";
 			frmSemester.value = "";
+			frmTitle.value = "";
+			frmAmount.value = "";
+			frmActive.value = "";
 		}
 	}
 	
@@ -380,10 +458,10 @@
         // Crear una matriz de datos con las columnas deseadas
         let data = [];
         // Agregar los encabezados de columna
-        data.push(["ID", "NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "Nº DOCUMENTO", "CARRERA", "SEMESTRE"]);
+        data.push(["ID", "NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "Nº DOCUMENTO", "CARRERA", "SEMESTRE", "DERECHO", "MONTO", "ESTADO"]);
         rows.forEach(function(row) {
           let rowData = [];
-          let columns = row.querySelectorAll("td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7)"); // Incluir solo las columnas deseadas
+          let columns = row.querySelectorAll("td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9),td:nth-child(10)"); // Incluir solo las columnas deseadas
           columns.forEach(function(column) {
             rowData.push(column.innerText);
           });
@@ -439,7 +517,7 @@
 	
 	function exportToPDF() {
 		// Crear un arreglo de encabezados
-		const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE'];
+		const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE', 'DERECHO','MONTO','ESTADO'];
 
 		// Crear un arreglo de filas para los registros
 		const rows = arreglo.map((item) => [
@@ -449,7 +527,10 @@
 			item.document_type,
 			item.document_number,
 			item.career,
-			item.semester
+			item.semester,
+			item.title,
+			item.amount,
+			item.active
 		]);
 
 		// Crear el documento PDF
@@ -459,7 +540,7 @@
 				{
 					table: {
 						headerRows: 1,
-						widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+						widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
 						body: [
 							headers, // Agregar los encabezados al documento
 							...rows // Agregar las filas de registros al documento

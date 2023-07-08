@@ -22,7 +22,6 @@ public interface CrudServiceSpec<T> {
 	 * @return
 	 */
 	T getForId(String identifier);
-
 	/**
 	 * Consulta datos en base a un criterio.
 	 * @param bean Datos para establecer el criterio.

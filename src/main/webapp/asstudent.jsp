@@ -194,7 +194,7 @@
 								</div>
 								<div class="col-md-3">
 									<label for="frmAmount" class="form-label">Monto</label>
-									<input type="number" class="form-control" id="frmAmount"
+									<input type="float" class="form-control" id="frmAmount"
 										required>
 									<div class="valid-feedback">¡Se ve bien!</div>
 									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
@@ -406,23 +406,23 @@
 	
 	fnBtnActualizar();
 	
-	function fnCargarForm(identifier){
-		arreglo.forEach(function(item) {
-			if(item.identifier == identifier){
-				frmIdentifier.value = item.identifier;
-				frmNames.value = item.names;
-				frmLast_name.value = item.last_name;
-				frmDocument_type.value = item.document_type;
-				frmDocument_number.value = item.document_number;
-				frmCareer.value = item.career;
-				frmSemester.value = item.Semester;
-				frmTitle.value = item.Title;
-				frmAmount.value = item.Amount;
-				frmActive.value = item.Active;
-				return true;
-			}
-		});
-	}
+	function fnCargarForm(identifier) {
+		  arreglo.forEach(function (item) {
+		    if (item.identifier == identifier) {
+		      frmIdentifier.value = item.identifier;
+		      frmNames.value = item.names;
+		      frmLast_name.value = item.last_name;
+		      frmDocument_type.value = item.document_type;
+		      frmDocument_number.value = item.document_number;
+		      frmCareer.value = item.career;
+		      frmSemester.value = item.semester;
+		      frmTitle.value = item.title;
+		      frmAmount.value = item.amount;
+		      frmActive.value = item.active;
+		      return true;
+		    }
+		  });
+		}
 	
 	function fnEstadoFormulario(estado){
 		frmNames.disabled = (estado==ACCION_ELIMINAR)

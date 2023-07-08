@@ -51,6 +51,9 @@ public class PastudentController extends HttpServlet {
 		bean.setDocument_number(request.getParameter("document_number"));
 		bean.setCareer(request.getParameter("career"));
 		bean.setSemester(request.getParameter("semester"));
+		bean.setTitle(request.getParameter("title"));
+		bean.setAmount(request.getParameter("amount"));
+		bean.setActive(request.getParameter("active"));
 		// Proceso
 		try {
 			switch (accion) {
@@ -84,11 +87,13 @@ public class PastudentController extends HttpServlet {
 		String names = request.getParameter("names");
 		String last_name = request.getParameter("last_name");
 		String semester = request.getParameter("semester");
+		String title = request.getParameter("title");
 		// Proceso
 		Pastudent bean = new Pastudent();
 		bean.setNames(names);
 		bean.setLast_name(last_name);
 		bean.setSemester(semester);
+		bean.setTitle(title);
 		List<Pastudent> lista = service.get(bean);
 		// Preparando el JSON
 		Gson gson = new Gson();
