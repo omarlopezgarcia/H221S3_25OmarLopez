@@ -47,6 +47,7 @@ public class DutyController extends HttpServlet {
 		bean.setIdentifier(Integer.parseInt(request.getParameter("identifier")));
 		bean.setTitle(request.getParameter("title"));
 		bean.setDates(request.getParameter("dates"));
+		bean.setAmount(request.getParameter("amount"));
 		// Proceso
 		try {
 			switch (accion) {
@@ -77,7 +78,7 @@ public class DutyController extends HttpServlet {
 	private void buscar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Datos
-		String title = request.getParameter("names");
+		String title = request.getParameter("title");
 		// Proceso
 		Duty bean = new Duty();
 		bean.setTitle(title);

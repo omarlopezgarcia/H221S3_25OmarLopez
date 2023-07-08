@@ -14,12 +14,12 @@ import pe.edu.vallegrande.app.service.spec.RowMapper;
 
 public class CrudAsstudentService implements CrudServiceSpec<Asstudent>, RowMapper<Asstudent> {
 
-	private final String SQL_SELECT_ACTIVE = "SELECT * FROM asstudent_active";
-	private final String SQL_SELECT_INACTIVE = "SELECT * FROM asstudent_inactive";
-	private final String SQL_INSERT = "INSERT INTO asstudent (names, last_name, document_type, document_number, career, semester) VALUES (?,?,?,?,?,?)";
-	private final String SQL_UPDATE = "UPDATE asstudent SET names=?, last_name=?, document_type=?, document_number=?, career=?, semester=? WHERE identifier=?";
-	private final String SQL_DELETE = "UPDATE asstudent SET active='I' WHERE identifier=?";
-	private final String SQL_RESTORE = "UPDATE asstudent SET active='A' WHERE identifier=?";
+	private final String SQL_SELECT_ACTIVE = "SELECT * FROM asstudent_debt";
+	private final String SQL_SELECT_INACTIVE = "SELECT * FROM asstudent_cancelled";
+	private final String SQL_INSERT = "INSERT INTO asstudent (names, last_name, document_type, document_number, career, semester, title, amount, active) VALUES (?,?,?,?,?,?,?,?,?)";
+	private final String SQL_UPDATE = "UPDATE asstudent SET names=?, last_name=?, document_type=?, document_number=?, career=?, semester=?, title=?, amount=?, active=? WHERE identifier=?";
+	private final String SQL_DELETE = "UPDATE asstudent SET active='C' WHERE identifier=?";
+	private final String SQL_RESTORE = "UPDATE asstudent SET active='D' WHERE identifier=?";
 	private final String SQL_ELIMINATE = "DELETE FROM asstudent WHERE identifier=?";
 
 	@Override
@@ -98,17 +98,19 @@ public class CrudAsstudentService implements CrudServiceSpec<Asstudent>, RowMapp
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		Asstudent item;
-		String names, last_name, semester, sql;
+		String names, last_name, semester, title, sql;
 		names = "%" + UtilService.setStringVacio(bean.getNames()) + "%";
 		last_name = "%" + UtilService.setStringVacio(bean.getLast_name()) + "%";
 		semester = "%" + UtilService.setStringVacio(bean.getSemester()) + "%";
+		title = "%" + UtilService.setStringVacio(bean.getTitle()) + "%";
 		try {
 			cn = AccesoDB.getConnection();
-			sql = SQL_SELECT_ACTIVE + " WHERE names LIKE ? AND last_name LIKE ? AND semester LIKE ?";
+			sql = SQL_SELECT_ACTIVE + " WHERE names LIKE ? AND last_name LIKE ? AND semester LIKE ? AND title LIKE ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, names);
 			pstm.setString(2, last_name);
 			pstm.setString(3, semester);
+			pstm.setString(4, title);
 			rs = pstm.executeQuery();
 			while(rs.next()) {
 				item = mapRow(rs);
@@ -142,6 +144,9 @@ public class CrudAsstudentService implements CrudServiceSpec<Asstudent>, RowMapp
 			pstm.setString(4, bean.getDocument_number());
 			pstm.setString(5, bean.getCareer());
 			pstm.setString(6, bean.getSemester());
+			pstm.setString(7, bean.getTitle());
+			pstm.setString(8, bean.getAmount());
+			pstm.setString(9, bean.getActive());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -177,7 +182,10 @@ public class CrudAsstudentService implements CrudServiceSpec<Asstudent>, RowMapp
 			pstm.setString(4, bean.getDocument_number());
 			pstm.setString(5, bean.getCareer());
 			pstm.setString(6, bean.getSemester());
-			pstm.setInt(7, bean.getIdentifier());
+			pstm.setString(7, bean.getTitle());
+			pstm.setString(8, bean.getAmount());
+			pstm.setString(9, bean.getActive());
+			pstm.setInt(10, bean.getIdentifier());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -289,6 +297,8 @@ public class CrudAsstudentService implements CrudServiceSpec<Asstudent>, RowMapp
 		bean.setDocument_number(rs.getString("document_number"));
 		bean.setCareer(rs.getString("career"));
 		bean.setSemester(rs.getString("semester"));
+		bean.setTitle(rs.getString("title"));
+		bean.setAmount(rs.getString("amount"));
 		bean.setActive(rs.getString("active"));
 		return bean;
 	}

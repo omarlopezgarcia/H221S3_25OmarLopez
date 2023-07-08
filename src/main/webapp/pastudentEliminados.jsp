@@ -25,7 +25,7 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item">ANÁLISIS DE SISTEMAS</li>
 						<li class="breadcrumb-item">Listado</li>
-						<li class="breadcrumb-item active">Lista</li>
+						<li class="breadcrumb-item active">Cancelado</li>
 					</ol>
 					<div class="card-body">
 						<form method="post" action="#">

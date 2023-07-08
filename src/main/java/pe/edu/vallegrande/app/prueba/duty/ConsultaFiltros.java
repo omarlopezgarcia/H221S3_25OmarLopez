@@ -10,7 +10,7 @@ public class ConsultaFiltros {
 	public static void main(String[] args) {
 		try {
 			Duty bean = new Duty();
-			bean.setTitle("");
+			bean.setTitle("Matricula");
 			CrudDutyService dutyService = new CrudDutyService();
 			List<Duty> lista = dutyService.get(bean);
 			for (Duty duty : lista) {

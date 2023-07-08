@@ -12,6 +12,9 @@
   var document_numberInput = form.querySelector('#frmDocument_number');
   var careerInput = form.querySelector('#frmCareer');
   var semesterInput = form.querySelector('#frmSemester');
+  var titleInput = form.querySelector('#frmTitle');
+  var amountInput = form.querySelector('#frmAmount');
+  var activeInput = form.querySelector('#frmActive');
 
   // Expresión regular para validar letras, espacios y caracteres acentuados
   var regexLettersWithSpace = /^[A-Za-z\u00C0-\u017F\s]+$/;

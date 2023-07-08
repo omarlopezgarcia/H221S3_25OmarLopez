@@ -15,8 +15,8 @@ import pe.edu.vallegrande.app.service.spec.RowMapper;
 public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 
 	private final String SQL_SELECT_ACTIVE = "SELECT * FROM duty";
-	private final String SQL_INSERT = "INSERT INTO duty (title, dates) VALUES (?,?)";
-	private final String SQL_UPDATE = "UPDATE duty SET title=?, dates=? WHERE identifier=?";
+	private final String SQL_INSERT = "INSERT INTO duty (title, dates, amount) VALUES (?,?,?)";
+	private final String SQL_UPDATE = "UPDATE duty SET title=?, dates=?, amount=? WHERE identifier=?";
 	private final String SQL_DELETE = "UPDATE duty SET active='I' WHERE identifier=?";
 	private final String SQL_RESTORE = "UPDATE duty SET active='A' WHERE identifier=?";
 	private final String SQL_ELIMINATE = "DELETE FROM duty WHERE identifier=?";
@@ -83,7 +83,7 @@ public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 		title = "%" + UtilService.setStringVacio(bean.getTitle()) + "%";
 		try {
 			cn = AccesoDB.getConnection();
-			sql = SQL_SELECT_ACTIVE + " WHERE title LIKE ?";
+			sql ="SELECT * FROM duty WHERE title LIKE ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, title);
 			rs = pstm.executeQuery();
@@ -114,7 +114,6 @@ public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 			cn.setAutoCommit(false);
 			pstm = cn.prepareStatement(SQL_INSERT);
 			pstm.setString(1, bean.getTitle());
-			pstm.setString(2, bean.getDates());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -146,7 +145,8 @@ public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 			pstm = cn.prepareStatement(SQL_UPDATE);
 			pstm.setString(1, bean.getTitle());
 			pstm.setString(2, bean.getDates());
-			pstm.setInt(3, bean.getIdentifier());
+			pstm.setString(3, bean.getAmount());
+			pstm.setInt(4, bean.getIdentifier());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -254,6 +254,7 @@ public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 		bean.setIdentifier(rs.getInt("identifier"));
 		bean.setTitle(rs.getString("title"));
 		bean.setDates(rs.getString("dates"));
+		bean.setAmount(rs.getString("amount"));
 		bean.setActive(rs.getString("active"));
 		return bean;
 	}

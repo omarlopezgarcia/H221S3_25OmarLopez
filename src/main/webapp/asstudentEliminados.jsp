@@ -25,7 +25,7 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item">ANÁLISIS DE SISTEMAS</li>
 						<li class="breadcrumb-item">Listado</li>
-						<li class="breadcrumb-item active">Lista</li>
+						<li class="breadcrumb-item active">Cancelado</li>
 					</ol>
 					<div class="card-body">
 						<form method="post" action="#">
@@ -48,10 +48,13 @@
 										<th scope="col">#</th>
 										<th scope="col">Nombre</th>
 										<th scope="col">Apellido</th>
-										<th scope="col">Tipo Documento</th>
-										<th scope="col">Nº Documento</th>
-										<th scope="col">Correo Electrónico</th>
-										<th scope="col">Nº Celular</th>
+										<th scope="col">Tip. de Doc.</th>
+										<th scope="col">Nro. de Doc.</th>
+										<th scope="col">Carrera</th>
+										<th scope="col">Semestre</th>
+										<th scope="col">Derecho</th>
+										<th scope="col">Monto</th>
+										<th scope="col">Estado</th>
 										<th scope="col">Accion</th>
 									</tr>
 								</thead>
@@ -121,6 +124,41 @@
 										<div class="invalid-feedback">Por favor, coloque bien el semestre.</div>
 									</div>
 								</div>
+								<div class="col-md-2">
+									<label for="frmTitle" class="form-label">Derecho</label>
+									<select class="form-select" id="frmTitle" required>
+										<option selected disabled value="">Elige...</option>
+										<option value="Matricula 1">Matricula 1</option>
+										<option value="Mensualidad 1">Mensualidad 1</option>
+										<option value="Mensualidad 2">Mensualidad 2</option>
+										<option value="Mensualidad 3">Mensualidad 3</option>
+										<option value="Mensualidad 4">Mensualidad 4</option>
+										<option value="Matricula 6">Matricula 2</option>
+										<option value="Mensualidad 5">Mensualidad 5</option>
+										<option value="Mensualidad 6">Mensualidad 6</option>
+										<option value="Mensualidad 7">Mensualidad 7</option>
+										<option value="Mensualidad 8">Mensualidad 8</option>
+										<option value="Mensualidad 9">Mensualidad 9</option>
+										<option value="Mensualidad 10">Mensualidad 10</option>
+									</select>
+									<div class="invalid-feedback">Seleccione el derecho que corresponda.</div>
+								</div>
+								<div class="col-md-3">
+									<label for="frmAmount" class="form-label">Monto</label>
+									<input type="text" class="form-control" id="frmAmount"
+										required>
+									<div class="valid-feedback">¡Se ve bien!</div>
+									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
+								</div>
+								<div class="col-md-3">
+									<label for="frmActive" class="form-label">Estado</label>
+									<select class="form-select" id="frmActive" required>
+										<option selected disabled value="">Elige...</option>
+										<option value="D">Deuda</option>
+										<option value="C">Cancelado</option>
+									</select>
+									<div class="invalid-feedback">Por favor, elija el estado.</div>
+								</div>
 								<div class="col-12">
 									<button class="btn btn-primary" id="btnProcesar" type="submit">Enviar
 										formulario</button>
@@ -161,6 +199,9 @@
 	let frmDocument_number = document.getElementById('frmDocument_number');
 	let frmCareer = document.getElementById('frmCareer');
 	let frmSemester = document.getElementById('frmSemester');
+	let frmTitle = document.getElementById('frmTitle');
+	let frmAmount = document.getElementById('frmAmount');
+	let frmActive = document.getElementById('frmActive');
 
 	// Programar los controles
 	btnProcesar.addEventListener("click", fnBtnProcesar);
@@ -183,12 +224,12 @@
 	function fnEliminar(identifier) {
 		Swal.fire({
 		  title: 'Estás seguro?',
-		  text: "Esto es irrevertible!",
+		  text: "Esto es irrevertible, una vez eliminado no se podrá recuperar!",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Si, lo has eliminado!'
+		  confirmButtonText: 'Si, quiero eliminarlo!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
 		    Swal.fire(
@@ -217,6 +258,10 @@
 		datos += "&document_number=" + document.getElementById("frmDocument_number").value;
 		datos += "&career=" + document.getElementById("frmCareer").value;
 		datos += "&semester=" + document.getElementById("frmSemester").value;
+		datos += "&title=" + document.getElementById("frmTitle").value;
+		datos += "&amount=" + document.getElementById("frmAmount").value;
+		datos += "&active=" + document.getElementById("frmActive").value;
+		
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", "AsstudentProcesar", true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -245,6 +290,9 @@
 							detalleTabla += "<td>" + item.document_number + "</td>";
 							detalleTabla += "<td>" + item.career + "</td>";
 							detalleTabla += "<td>" + item.semester + "</td>";
+							detalleTabla += "<td>" + item.title + "</td>";
+							detalleTabla += "<td>" + item.amount + "</td>";
+							detalleTabla += "<td>" + item.active + "</td>";
 							detalleTabla += "<td>";
 							detalleTabla += "<a class='btn btn-primary' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
 							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
@@ -271,6 +319,9 @@
 				frmDocument_number.value = item.document_number;
 				frmCareer.value = item.career;
 				frmSemester.value = item.semester;
+				frmTitle.value = item.Title;
+				frmAmount.value = item.Amount;
+				frmActive.value = item.Active;
 				return true;
 			}
 		});
