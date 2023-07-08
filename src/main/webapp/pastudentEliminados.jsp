@@ -48,10 +48,13 @@
 										<th scope="col">#</th>
 										<th scope="col">Nombre</th>
 										<th scope="col">Apellido</th>
-										<th scope="col">Tipo Documento</th>
-										<th scope="col">Nº Documento</th>
-										<th scope="col">Correo Electrónico</th>
-										<th scope="col">Nº Celular</th>
+										<th scope="col">Tip. de Doc.</th>
+										<th scope="col">Nro. de Doc.</th>
+										<th scope="col">Carrera</th>
+										<th scope="col">Semestre</th>
+										<th scope="col">Derecho</th>
+										<th scope="col">Monto</th>
+										<th scope="col">Estado</th>
 										<th scope="col">Accion</th>
 									</tr>
 								</thead>
@@ -141,145 +144,158 @@
 <script src="js/asstudent.js"></script>
 <script>
 	
-	// Constantes del CRUD
-	const ACCION_RESTAURAR = "RESTAURAR";
-	const ACCION_ELIMINAR = "ELIMINATE";
+//Constantes del CRUD
+const ACCION_RESTAURAR = "RESTAURAR";
+const ACCION_ELIMINAR = "ELIMINATE";
 
-	// Arreglo de registros
-	let arreglo = [];
-	
-	// Acceder a los controles
-	let btnProcesar = document.getElementById("btnProcesar");
-	let btnActualizar = document.getElementById("btnActualizar");
-	
-	// Campos del formulario
-	let accion = document.getElementById('accion');
-	let frmIdentifier = document.getElementById('frmIdentifier');
-	let frmNames = document.getElementById('frmNames');
-	let frmLast_name = document.getElementById('frmLast_name');
-	let frmDocument_type = document.getElementById('frmDocument_type');
-	let frmDocument_number = document.getElementById('frmDocument_number');
-	let frmCareer = document.getElementById('frmCareer');
-	let frmSemester = document.getElementById('frmSemester');
+// Arreglo de registros
+let arreglo = [];
 
-	// Programar los controles
-	btnProcesar.addEventListener("click", fnBtnProcesar);
-	btnActualizar.addEventListener("click", fnBtnActualizar);
+// Acceder a los controles
+let btnProcesar = document.getElementById("btnProcesar");
+let btnActualizar = document.getElementById("btnActualizar");
 
-	// Funcion fnEditar
-	function fnRestaurar(identifier) {
-		Swal.fire(
-		  'Bien hecho!',
-		  'Has seleccionado el boton!',
-		  'success'
-		)
-		document.getElementById("accion").value = ACCION_RESTAURAR;
+// Campos del formulario
+let accion = document.getElementById('accion');
+let frmIdentifier = document.getElementById('frmIdentifier');
+let frmNames = document.getElementById('frmNames');
+let frmLast_name = document.getElementById('frmLast_name');
+let frmDocument_type = document.getElementById('frmDocument_type');
+let frmDocument_number = document.getElementById('frmDocument_number');
+let frmCareer = document.getElementById('frmCareer');
+let frmSemester = document.getElementById('frmSemester');
+let frmTitle = document.getElementById('frmTitle');
+let frmAmount = document.getElementById('frmAmount');
+let frmActive = document.getElementById('frmActive');
+
+// Programar los controles
+btnProcesar.addEventListener("click", fnBtnProcesar);
+btnActualizar.addEventListener("click", fnBtnActualizar);
+
+// Funcion fnEditar
+function fnRestaurar(identifier) {
+	Swal.fire(
+	  'Bien hecho!',
+	  'Has seleccionado el boton!',
+	  'success'
+	)
+	document.getElementById("accion").value = ACCION_RESTAURAR;
+	fnCargarForm(identifier);
+	fnBtnProcesar();
+	setTimeout(fnBtnActualizar, 1000);
+}
+
+// Funcion fnEliminar
+function fnEliminar(identifier) {
+	Swal.fire({
+	  title: 'Estás seguro?',
+	  text: "Esto es irrevertible, una vez eliminado no se podrá recuperar!",
+	  icon: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Si, quiero eliminarlo!'
+	}).then((result) => {
+	  if (result.isConfirmed) {
+	    Swal.fire(
+	      'Eliminado!',
+	      'Has eliminado el registro del estudiante.',
+	      'success'
+	    )
+		document.getElementById("accion").value = ACCION_ELIMINAR;
 		fnCargarForm(identifier);
 		fnBtnProcesar();
 		setTimeout(fnBtnActualizar, 1000);
-	}
+	  }
+	})
+}
 
-	// Funcion fnEliminar
-	function fnEliminar(identifier) {
-		Swal.fire({
-		  title: 'Estás seguro?',
-		  text: "Esto es irrevertible!",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Si, lo has eliminado!'
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire(
-		      'Eliminado!',
-		      'Has eliminado el registro del estudiante.',
-		      'success'
-		    )
-			document.getElementById("accion").value = ACCION_ELIMINAR;
-			fnCargarForm(identifier);
-			fnBtnProcesar();
-			setTimeout(fnBtnActualizar, 1000);
-		  }
-		})
+// Funcion fnBtnProcesar
+function fnBtnProcesar() {
+	if(!fnValidar()){
+		return;
 	}
-
-	// Funcion fnBtnProcesar
-	function fnBtnProcesar() {
-		if(!fnValidar()){
-			return;
+	let datos = "accion=" + document.getElementById("accion").value;
+	datos += "&identifier=" + document.getElementById("frmIdentifier").value;
+	datos += "&names=" + document.getElementById("frmNames").value;
+	datos += "&last_name=" + document.getElementById("frmLast_name").value;
+	datos += "&document_type=" + document.getElementById("frmDocument_type").value;
+	datos += "&document_number=" + document.getElementById("frmDocument_number").value;
+	datos += "&career=" + document.getElementById("frmCareer").value;
+	datos += "&semester=" + document.getElementById("frmSemester").value;
+	datos += "&title=" + document.getElementById("frmTitle").value;
+	datos += "&amount=" + document.getElementById("frmAmount").value;
+	datos += "&active=" + document.getElementById("frmActive").value;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", "AsstudentProcesar", true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log(xhr.responseText);
 		}
-		let datos = "accion=" + document.getElementById("accion").value;
-		datos += "&identifier=" + document.getElementById("frmIdentifier").value;
-		datos += "&names=" + document.getElementById("frmNames").value;
-		datos += "&last_name=" + document.getElementById("frmLast_name").value;
-		datos += "&document_type=" + document.getElementById("frmDocument_type").value;
-		datos += "&document_number=" + document.getElementById("frmDocument_number").value;
-		datos += "&career=" + document.getElementById("frmCareer").value;
-		datos += "&semester=" + document.getElementById("frmSemester").value;
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", "PastudentProcesar", true);
-		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				console.log(xhr.responseText);
-			}
-		};
-		xhr.send(datos);
-	}
+	};
+	xhr.send(datos);
+}
+
+function fnBtnActualizar() {
+	let xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "AsstudentHistorial", true);
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			let respuesta = xhttp.responseText;
+			arreglo = JSON.parse(respuesta);
+			let detalleTabla = "";
+			arreglo.forEach(function(item) {
+						detalleTabla += "<tr>";
+						detalleTabla += "<td>" + item.identifier + "</td>";
+						detalleTabla += "<td>" + item.names + "</td>";
+						detalleTabla += "<td>" + item.last_name + "</td>";
+						detalleTabla += "<td>" + item.document_type + "</td>";
+						detalleTabla += "<td>" + item.document_number + "</td>";
+						detalleTabla += "<td>" + item.career + "</td>";
+						detalleTabla += "<td>" + item.semester + "</td>";
+						detalleTabla += "<td>" + item.title + "</td>";
+						detalleTabla += "<td>" + item.amount + "</td>";
+						detalleTabla += "<td>" + item.active + "</td>";
+						detalleTabla += "<td>";
+						detalleTabla += "<a class='btn btn-primary' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
+						detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
+						detalleTabla += "</td>";
+						detalleTabla += "</tr>";
+					});
+			document.getElementById("detalleTabla").innerHTML = detalleTabla;
+			document.getElementById("divResultado").style.display = "block";
+			document.getElementById("divRegistro").style.display = "none";
+		}
+	};
+	xhttp.send();
+}
+
+fnBtnActualizar();
+
+function fnCargarForm(identifier){
+	arreglo.forEach(function(item) {
+		if(item.identifier == identifier){
+			frmIdentifier.value = item.identifier;
+			frmNames.value = item.names;
+			frmLast_name.value = item.last_name;
+			frmDocument_type.value = item.document_type;
+			frmDocument_number.value = item.document_number;
+			frmCareer.value = item.career;
+			frmSemester.value = item.semester;
+			frmTitle.value = item.Title;
+			frmAmount.value = item.Amount;
+			frmActive.value = item.Active;
+			return true;
+		}
+	});
+}
+
+function fnValidar(){
 	
-	function fnBtnActualizar() {
-		let xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "PastudentHistorial", true);
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				let respuesta = xhttp.responseText;
-				arreglo = JSON.parse(respuesta);
-				let detalleTabla = "";
-				arreglo.forEach(function(item) {
-							detalleTabla += "<tr>";
-							detalleTabla += "<td>" + item.identifier + "</td>";
-							detalleTabla += "<td>" + item.names + "</td>";
-							detalleTabla += "<td>" + item.last_name + "</td>";
-							detalleTabla += "<td>" + item.document_type + "</td>";
-							detalleTabla += "<td>" + item.document_number + "</td>";
-							detalleTabla += "<td>" + item.career + "</td>";
-							detalleTabla += "<td>" + item.semester + "</td>";
-							detalleTabla += "<td>";
-							detalleTabla += "<a class='btn btn-primary' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
-							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
-							detalleTabla += "</td>";
-							detalleTabla += "</tr>";
-						});
-				document.getElementById("detalleTabla").innerHTML = detalleTabla;
-				document.getElementById("divResultado").style.display = "block";
-				document.getElementById("divRegistro").style.display = "none";
-			}
-		};
-		xhttp.send();
-	}
-	
-	fnBtnActualizar();
-	
-	function fnCargarForm(identifier){
-		arreglo.forEach(function(item) {
-			if(item.identifier == identifier){
-				frmIdentifier.value = item.identifier;
-				frmNames.value = item.names;
-				frmLast_name.value = item.last_name;
-				frmDocument_type.value = item.document_type;
-				frmDocument_number.value = item.document_number;
-				frmCareer.value = item.career;
-				frmSemester.value = item.semester;
-				return true;
-			}
-		});
-	}
-	
-	function fnValidar(){
-		
-		return true;
-	}
+	return true;
+}
 </script>
 </body>
 </html>
