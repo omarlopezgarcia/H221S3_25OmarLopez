@@ -98,6 +98,7 @@
 										<th scope="col">Semestre</th>
 										<th scope="col">Derecho</th>
 										<th scope="col">Monto</th>
+										<th scope="col">Fecha</th>
 										<th scope="col">Estado</th>
 										<th scope="col">Accion</th>
 									</tr>
@@ -200,6 +201,13 @@
 									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
 								</div>
 								<div class="col-md-3">
+									<label for="frmDates" class="form-label">Fecha</label>
+									<input type="date" class="form-control" id="frmDates"
+										required>
+									<div class="valid-feedback">¡Se ve bien!</div>
+									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
+								</div>
+								<div class="col-md-3">
 									<label for="frmActive" class="form-label">Estado</label>
 									<select class="form-select" id="frmActive" required>
 										<option selected disabled value="">Elige...</option>
@@ -253,6 +261,7 @@
 	let frmSemester = document.getElementById('frmSemester');
 	let frmTitle = document.getElementById('frmTitle');
 	let frmAmount = document.getElementById('frmAmount');
+	let frmDates = document.getElementById('frmDates');
 	let frmActive = document.getElementById('frmActive');
 
 	// Programar los controles
@@ -311,6 +320,7 @@
 		datos += "&semester=" + document.getElementById("frmSemester").value;
 		datos += "&title=" + document.getElementById("frmTitle").value;
 		datos += "&amount=" + document.getElementById("frmAmount").value;
+		datos += "&dates=" + document.getElementById("frmDates").value;
 		datos += "&active=" + document.getElementById("frmActive").value;
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", "PastudentProcesar", true);
@@ -344,22 +354,23 @@
 				arreglo = JSON.parse(respuesta);
 				let detalleTabla = "";
 				arreglo.forEach(function(item) {
-							detalleTabla += "<tr>";
-							detalleTabla += "<td>" + item.identifier + "</td>";
-							detalleTabla += "<td>" + item.names + "</td>";
-							detalleTabla += "<td>" + item.last_name + "</td>";
-							detalleTabla += "<td>" + item.document_type + "</td>";
-							detalleTabla += "<td>" + item.document_number + "</td>";
-							detalleTabla += "<td>" + item.career + "</td>";
-							detalleTabla += "<td>" + item.semester + "</td>";
-							detalleTabla += "<td>" + item.title + "</td>";
-							detalleTabla += "<td>" + item.amount + "</td>";
-							detalleTabla += "<td>" + item.active + "</td>";
-							detalleTabla += "<td>";
-							detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
-							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
-							detalleTabla += "</td>";
-							detalleTabla += "</tr>";
+					detalleTabla += "<tr>";
+					detalleTabla += "<td>" + item.identifier + "</td>";
+					detalleTabla += "<td>" + item.names + "</td>";
+					detalleTabla += "<td>" + item.last_name + "</td>";
+					detalleTabla += "<td>" + item.document_type + "</td>";
+					detalleTabla += "<td>" + item.document_number + "</td>";
+					detalleTabla += "<td>" + item.career + "</td>";
+					detalleTabla += "<td>" + item.semester + "</td>";
+					detalleTabla += "<td>" + item.title + "</td>";
+					detalleTabla += "<td>" + item.amount + "</td>";
+					detalleTabla += "<td>" + item.dates + "</td>";
+					detalleTabla += "<td>" + item.active + "</td>";
+					detalleTabla += "<td>";
+					detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
+					detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
+					detalleTabla += "</td>";
+					detalleTabla += "</tr>";
 						});
 				document.getElementById("detalleTabla").innerHTML = detalleTabla;
 				document.getElementById("divResultado").style.display = "block";
@@ -378,22 +389,23 @@
 				arreglo = JSON.parse(respuesta);
 				let detalleTabla = "";
 				arreglo.forEach(function(item) {
-							detalleTabla += "<tr>";
-							detalleTabla += "<td>" + item.identifier + "</td>";
-							detalleTabla += "<td>" + item.names + "</td>";
-							detalleTabla += "<td>" + item.last_name + "</td>";
-							detalleTabla += "<td>" + item.document_type + "</td>";
-							detalleTabla += "<td>" + item.document_number + "</td>";
-							detalleTabla += "<td>" + item.career + "</td>";
-							detalleTabla += "<td>" + item.semester + "</td>";
-							detalleTabla += "<td>" + item.title + "</td>";
-							detalleTabla += "<td>" + item.amount + "</td>";
-							detalleTabla += "<td>" + item.active + "</td>";
-							detalleTabla += "<td>";
-							detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
-							detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
-							detalleTabla += "</td>";
-							detalleTabla += "</tr>";
+					detalleTabla += "<tr>";
+					detalleTabla += "<td>" + item.identifier + "</td>";
+					detalleTabla += "<td>" + item.names + "</td>";
+					detalleTabla += "<td>" + item.last_name + "</td>";
+					detalleTabla += "<td>" + item.document_type + "</td>";
+					detalleTabla += "<td>" + item.document_number + "</td>";
+					detalleTabla += "<td>" + item.career + "</td>";
+					detalleTabla += "<td>" + item.semester + "</td>";
+					detalleTabla += "<td>" + item.title + "</td>";
+					detalleTabla += "<td>" + item.amount + "</td>";
+					detalleTabla += "<td>" + item.dates + "</td>";
+					detalleTabla += "<td>" + item.active + "</td>";
+					detalleTabla += "<td>";
+					detalleTabla += "<a class='btn btn-primary' href='javascript:fnEditar(" + item.identifier + ");'><i class='fa-solid fa-pen'></i></a> ";
+					detalleTabla += "<a class='btn btn-danger' href='javascript:fnEliminar(" + item.identifier + ");'><i class='fa-solid fa-trash'></i></a>";
+					detalleTabla += "</td>";
+					detalleTabla += "</tr>";
 						});
 				document.getElementById("detalleTabla").innerHTML = detalleTabla;
 				document.getElementById("divResultado").style.display = "block";
@@ -417,6 +429,7 @@
 			      frmSemester.value = item.semester;
 			      frmTitle.value = item.title;
 			      frmAmount.value = item.amount;
+			      frmDates.value = item.dates;
 			      frmActive.value = item.active;
 				return true;
 			}
@@ -432,6 +445,7 @@
 		frmSemester.disabled = (estado==ACCION_ELIMINAR)
 		frmTitle.disabled = (estado==ACCION_ELIMINAR)
 		frmAmount.disabled = (estado==ACCION_ELIMINAR)
+		frmDates.disabled = (estado==ACCION_ELIMINAR)
 		frmActive.disabled = (estado==ACCION_ELIMINAR)
 		if(estado==ACCION_NUEVO){
 			frmIdentifier.value = "0";
@@ -458,10 +472,10 @@
         // Crear una matriz de datos con las columnas deseadas
         let data = [];
         // Agregar los encabezados de columna
-        data.push(["ID", "NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "Nº DOCUMENTO", "CARRERA", "SEMESTRE", "DERECHO", "MONTO", "ESTADO"]);
+        data.push(["ID", "NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "Nº DOCUMENTO", "CARRERA", "SEMESTRE", "DERECHO", "MONTO", "FECHA", "ESTADO"]);
         rows.forEach(function(row) {
           let rowData = [];
-          let columns = row.querySelectorAll("td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9),td:nth-child(10)"); // Incluir solo las columnas deseadas
+          let columns = row.querySelectorAll("td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9),td:nth-child(10),td:nth-child(11)"); // Incluir solo las columnas deseadas
           columns.forEach(function(column) {
             rowData.push(column.innerText);
           });
@@ -517,7 +531,7 @@
 	
 	function exportToPDF() {
 	// Crear un arreglo de encabezados
-	const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE', 'DERECHO', 'MONTO', 'ESTADO'];
+	const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE', 'DERECHO', 'MONTO', 'FECHA', 'ESTADO'];
 
 	// Crear un arreglo de filas para los registros
 	const rows = arreglo.map((item) => [
@@ -530,6 +544,7 @@
 		item.semester,
 		item.title,
 		item.amount,
+		item.dates,
 		item.active
 	]);
 
@@ -540,7 +555,7 @@
 			{
 				table: {
 					headerRows: 1,
-					widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+					widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
 					body: [
 						headers, // Agregar los encabezados al documento
 						...rows // Agregar las filas de registros al documento

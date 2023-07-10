@@ -53,6 +53,7 @@ public class AsstudentController extends HttpServlet {
 		bean.setSemester(request.getParameter("semester"));
 		bean.setTitle(request.getParameter("title"));
 		bean.setAmount(request.getParameter("amount"));
+		bean.setDates(request.getParameter("dates"));
 		bean.setActive(request.getParameter("active"));
 		// Proceso
 		try {

@@ -16,8 +16,8 @@ public class CrudPastudentService implements CrudServiceSpec<Pastudent>, RowMapp
 
 	private final String SQL_SELECT_ACTIVE = "SELECT * FROM pastudent_debt";
 	private final String SQL_SELECT_INACTIVE = "SELECT * FROM pastudent_cancelled";
-	private final String SQL_INSERT = "INSERT INTO pastudent (names, last_name, document_type, document_number, career, semester, title, amount, active) VALUES (?,?,?,?,?,?,?,?,?)";
-	private final String SQL_UPDATE = "UPDATE pastudent SET names=?, last_name=?, document_type=?, document_number=?, career=?, semester=?, title=?, amount=?, active=? WHERE identifier=?";
+	private final String SQL_INSERT = "INSERT INTO pastudent (names, last_name, document_type, document_number, career, semester, title, amount, dates, active) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	private final String SQL_UPDATE = "UPDATE pastudent SET names=?, last_name=?, document_type=?, document_number=?, career=?, semester=?, title=?, amount=?, dates=? active=? WHERE identifier=?";
 	private final String SQL_DELETE = "UPDATE pastudent SET active='C' WHERE identifier=?";
 	private final String SQL_RESTORE = "UPDATE pastudent SET active='D' WHERE identifier=?";
 	private final String SQL_ELIMINATE = "DELETE FROM pastudent WHERE identifier=?";
@@ -146,7 +146,8 @@ public class CrudPastudentService implements CrudServiceSpec<Pastudent>, RowMapp
 			pstm.setString(6, bean.getSemester());
 			pstm.setString(7, bean.getTitle());
 			pstm.setString(8, bean.getAmount());
-			pstm.setString(9, bean.getActive());
+			pstm.setString(9, bean.getDates());
+			pstm.setString(10, bean.getActive());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -184,8 +185,9 @@ public class CrudPastudentService implements CrudServiceSpec<Pastudent>, RowMapp
 			pstm.setString(6, bean.getSemester());
 			pstm.setString(7, bean.getTitle());
 			pstm.setString(8, bean.getAmount());
-			pstm.setString(9, bean.getActive());
-			pstm.setInt(10, bean.getIdentifier());
+			pstm.setString(9, bean.getDates());
+			pstm.setString(10, bean.getActive());
+			pstm.setInt(11, bean.getIdentifier());
 			filas = pstm.executeUpdate();
 			pstm.close();
 			if (filas != 1) {
@@ -299,6 +301,7 @@ public class CrudPastudentService implements CrudServiceSpec<Pastudent>, RowMapp
 		bean.setSemester(rs.getString("semester"));
 		bean.setTitle(rs.getString("title"));
 		bean.setAmount(rs.getString("amount"));
+		bean.setDates(rs.getString("dates"));
 		bean.setActive(rs.getString("active"));
 		return bean;
 	}

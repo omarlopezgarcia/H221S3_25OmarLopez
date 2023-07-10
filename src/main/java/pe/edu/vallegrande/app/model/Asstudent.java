@@ -3,14 +3,14 @@ package pe.edu.vallegrande.app.model;
 public class Asstudent {
 
 	private Integer identifier;
-	private String names, last_name, document_type, document_number, career, semester, title, amount, active;
+	private String names, last_name, document_type, document_number, career, semester, title, amount, dates, active;
 	
 	public Asstudent() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Asstudent(Integer identifier, String names, String last_name, String document_type, String document_number,
-			String career, String semester, String title, String amount, String active) {
+			String career, String semester, String title, String amount, String dates, String active) {
 		super();
 		this.identifier = identifier;
 		this.names = names;
@@ -21,11 +21,12 @@ public class Asstudent {
 		this.semester = semester;
 		this.title = title;
 		this.amount = amount;
+		this.dates = dates;
 		this.active = active;
 	}
 
 	public Asstudent(String names, String last_name, String document_type, String document_number, String career,
-			String semester, String title, String amount, String active) {
+			String semester, String title, String amount,String dates, String active) {
 		super();
 		this.names = names;
 		this.last_name = last_name;
@@ -35,11 +36,12 @@ public class Asstudent {
 		this.semester = semester;
 		this.title = title;
 		this.amount = amount;
+		this.dates= dates;
 		this.active = active;
 	}
 
 	public Asstudent(Integer identifier, String names, String last_name, String document_type, String document_number,
-			String career, String semester, String title, String amount) {
+			String career, String semester, String title, String amount,String dates) {
 		super();
 		this.identifier = identifier;
 		this.names = names;
@@ -50,10 +52,11 @@ public class Asstudent {
 		this.semester = semester;
 		this.title = title;
 		this.amount = amount;
+		this.dates = dates;
 	}
 
 	public Asstudent(String names, String last_name, String document_type, String document_number, String career,
-			String semester, String title, String amount) {
+			String semester, String title, String amount, String dates) {
 		super();
 		this.names = names;
 		this.last_name = last_name;
@@ -63,6 +66,7 @@ public class Asstudent {
 		this.semester = semester;
 		this.title = title;
 		this.amount = amount;
+		this.dates = dates;
 	}
 
 	public Integer getIdentifier() {
@@ -137,6 +141,14 @@ public class Asstudent {
 		this.amount = amount;
 	}
 	
+	public String getDates() {
+		return dates;
+	}
+
+	public void setDates(String dates) {
+		this.dates = dates;
+	}
+	
 	public String getActive() {
 		return active;
 	}
@@ -156,6 +168,7 @@ public class Asstudent {
 		data += ", " + this.semester;
 		data += ", " + this.title;
 		data += ", " + this.amount;
+		data += ", " + this.dates;
 		data += ", " + this.active + "]";
 		return data;
 	}

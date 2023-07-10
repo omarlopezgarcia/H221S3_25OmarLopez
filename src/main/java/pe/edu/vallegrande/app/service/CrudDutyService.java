@@ -14,7 +14,7 @@ import pe.edu.vallegrande.app.service.spec.RowMapper;
 
 public class CrudDutyService implements CrudServiceSpec<Duty>, RowMapper<Duty> {
 
-	private final String SQL_SELECT_ACTIVE = "SELECT * FROM duty";
+	private final String SQL_SELECT_ACTIVE = "SELECT * FROM duty_date";
 	private final String SQL_INSERT = "INSERT INTO duty (title, dates, amount) VALUES (?,?,?)";
 	private final String SQL_UPDATE = "UPDATE duty SET title=?, dates=?, amount=? WHERE identifier=?";
 	private final String SQL_DELETE = "UPDATE duty SET active='I' WHERE identifier=?";

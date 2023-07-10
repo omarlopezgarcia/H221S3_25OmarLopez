@@ -54,6 +54,7 @@
 										<th scope="col">Semestre</th>
 										<th scope="col">Derecho</th>
 										<th scope="col">Monto</th>
+										<th scope="col">Fecha</th>
 										<th scope="col">Estado</th>
 										<th scope="col">Accion</th>
 									</tr>
@@ -151,6 +152,13 @@
 									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
 								</div>
 								<div class="col-md-3">
+									<label for="frmDates" class="form-label">Fecha</label>
+									<input type="date" class="form-control" id="frmDates"
+										required>
+									<div class="valid-feedback">¡Se ve bien!</div>
+									<div class="invalid-feedback">Por favor, coloque algo válido.</div>
+								</div>
+								<div class="col-md-3">
 									<label for="frmActive" class="form-label">Estado</label>
 									<select class="form-select" id="frmActive" required>
 										<option selected disabled value="">Elige...</option>
@@ -201,6 +209,7 @@
 	let frmSemester = document.getElementById('frmSemester');
 	let frmTitle = document.getElementById('frmTitle');
 	let frmAmount = document.getElementById('frmAmount');
+	let frmDates = document.getElementById('frmDates');
 	let frmActive = document.getElementById('frmActive');
 
 	// Programar los controles
@@ -260,6 +269,7 @@
 		datos += "&semester=" + document.getElementById("frmSemester").value;
 		datos += "&title=" + document.getElementById("frmTitle").value;
 		datos += "&amount=" + document.getElementById("frmAmount").value;
+		datos += "&dates=" + document.getElementById("frmDates").value;
 		datos += "&active=" + document.getElementById("frmActive").value;
 		
 		let xhr = new XMLHttpRequest();
@@ -292,6 +302,7 @@
 							detalleTabla += "<td>" + item.semester + "</td>";
 							detalleTabla += "<td>" + item.title + "</td>";
 							detalleTabla += "<td>" + item.amount + "</td>";
+							detalleTabla += "<td>" + item.dates + "</td>";
 							detalleTabla += "<td>" + item.active + "</td>";
 							detalleTabla += "<td>";
 							detalleTabla += "<a class='btn btn-primary' href='javascript:fnRestaurar(" + item.identifier + ");'><i class='fa-solid fa-trash-arrow-up'></i></a> ";
@@ -319,9 +330,10 @@
 				frmDocument_number.value = item.document_number;
 				frmCareer.value = item.career;
 				frmSemester.value = item.semester;
-				frmTitle.value = item.Title;
-				frmAmount.value = item.Amount;
-				frmActive.value = item.Active;
+				frmTitle.value = item.title;
+				frmAmount.value = item.amount;
+				frmDates.value = item.dates;
+				frmActive.value = item.active;
 				return true;
 			}
 		});
