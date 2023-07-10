@@ -516,50 +516,66 @@
 	}
 	
 	function exportToPDF() {
-		// Crear un arreglo de encabezados
-		const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE', 'DERECHO','MONTO','ESTADO'];
+	// Crear un arreglo de encabezados
+	const headers = ['ID', 'NOMBRE', 'APELLIDO', 'TIPO DOCUMENTO', 'Nº DOCUMENTO', 'CARRERA', 'SEMESTRE', 'DERECHO', 'MONTO', 'ESTADO'];
 
-		// Crear un arreglo de filas para los registros
-		const rows = arreglo.map((item) => [
-			item.identifier,
-			item.names,
-			item.last_name,
-			item.document_type,
-			item.document_number,
-			item.career,
-			item.semester,
-			item.title,
-			item.amount,
-			item.active
-		]);
+	// Crear un arreglo de filas para los registros
+	const rows = arreglo.map((item) => [
+		item.identifier,
+		item.names,
+		item.last_name,
+		item.document_type,
+		item.document_number,
+		item.career,
+		item.semester,
+		item.title,
+		item.amount,
+		item.active
+	]);
 
-		// Crear el documento PDF
-		const docDefinition = {
-			content: [
-				{ text: 'Reporte PDF - EstudiantesPA', style: 'header' },
-				{
-					table: {
-						headerRows: 1,
-						widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
-						body: [
-							headers, // Agregar los encabezados al documento
-							...rows // Agregar las filas de registros al documento
-						]
+	// Crear el documento PDF
+	const docDefinition = {
+		content: [
+			{ text: 'Reporte PDF - EstudiantesPA', style: 'header' },
+			{
+				table: {
+					headerRows: 1,
+					widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+					body: [
+						headers, // Agregar los encabezados al documento
+						...rows // Agregar las filas de registros al documento
+					]
+				},
+				layout: {
+					fillColor: function (rowIndex, node, columnIndex) {
+						return rowIndex % 2 === 0 ? '#CCCCCC' : null;
 					}
 				}
-			],
-			styles: {
-				header: {
-					fontSize: 18,
-					bold: true,
-					alignment: 'center'
-				}
 			}
-		};
+		],
+		styles: {
+			header: {
+				fontSize: 18,
+				bold: true,
+				alignment: 'center',
+				margin: [0, 0, 0, 10]
+			},
+			table: {
+				fontSize: 10,
+				margin: [0, 5, 0, 15]
+			}
+		},
+		pageSize: 'A4',
+		pageOrientation: 'landscape',
+		pageMargins: [40, 60, 40, 60],
+		defaultStyle: {
+			fontSize: 10
+		}
+	};
 
-		// Generar el archivo PDF
-		pdfMake.createPdf(docDefinition).download('reporteEstudiantesPA.pdf');
-	}
+	// Generar el archivo PDF
+	pdfMake.createPdf(docDefinition).download('reporteEstudiantesPA.pdf');
+}
 
 </script>
 </body>
